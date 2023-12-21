@@ -1,9 +1,10 @@
-import { Inter, Lato } from "next/font/google";
+import { Inter, Lato, IBM_Plex_Sans } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/Navbar,";
 
 const inter = Inter({ subsets: ["latin"] });
 const lato = Lato({ subsets: ["latin"], weight: ["300"] });
+const ibm = IBM_Plex_Sans({ subsets: ["latin"], weight: ["400"] });
 
 export const metadata = {
   title: "Create Next App",
@@ -13,8 +14,8 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <body className={lato.className}>
-        <Navbar />
+      <body className={ibm.className}>
+        <Navbar/>
         {children}
       </body>
     </html>
