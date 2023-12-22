@@ -2,3 +2,10 @@
 @tailwind components;
 @tailwind utilities;
 
+.dropdown-menu {
+  transition: all linear 0.3s;
+}
+
+.dropdown-list > li{
+    margin-top: 10px;
+}

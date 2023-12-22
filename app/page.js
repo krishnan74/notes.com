@@ -106,14 +106,14 @@ const Blog = () => {
 
   return (
     <div className="container flex px-4 justify-around gap-0 pt-[90px]">
-      <div className="w-1/6 fixed left-[20px]">
+      <div className="w-[14%] fixed left-[50px] border-r">
         <h2 className="text-2xl font-bold text-center">Index</h2>
         <ul>
           {topicList.map((post) => (
             <li
               key={post.id}
               id="topicList"
-              className={`py-2 px-3 cursor-pointer border-sp-2 border-gray-200 hover:bg-gray-100 ${
+              className={`py-2 px-3 cursor-pointer border-b border-gray-200 ${
                 post.id === indexNumber ? "bg-gray-100" : ""
               }`}
               onClick={() => setIndexNumber(post.id)}
@@ -156,7 +156,7 @@ const Blog = () => {
                     key={index}
                     className="border-sp-2 border-gray-200 my-3 "
                   >
-                    <h3 className="text-2xl font-bold">
+                    <h3 className="text-lg font-bold">
                       {index + 1 + ") " + question}
                     </h3>
                     <p className="text-lg pl-5 font-extralight">
@@ -169,22 +169,22 @@ const Blog = () => {
           )}
         </div>
       </div>
-      <div className="w-1/6 fixed right-0">
+      <div className="w-1/6 fixed right-[50px] border-l pl-5">
         <h2 className="text-2xl font-bold mb-2 ">Related Topics</h2>
         <ul>
-          <li>
-            <span className="font-bold">PSPP UNIT-2:</span> DATA TYPES,
+          <li className="border-b mb-2">
+            <span className="font-bold ">PSPP UNIT-2:</span> DATA TYPES,
             EXPRESSIONS, STATEMENTS
           </li>
-          <li>
+          <li className="border-b mb-2">
             <span className="font-bold">PSPP UNIT-3:</span> CONTROL FLOW,
             FUNCTIONS, STRINGS
           </li>
-          <li>
+          <li className="border-b mb-2">
             <span className="font-bold">PSPP UNIT-4:</span> LISTS, TUPLES,
             DICTIONARIES
           </li>
-          <li>
+          <li className="border-b mb-2">
             <span className="font-bold">PSPP UNIT-5:</span> FILES, MODULES,
             PACKAGES
           </li>
@@ -192,7 +192,10 @@ const Blog = () => {
       </div>
       <div className="fixed top-[90vh] right-[16vw]">
         {showBackToTop && (
-          <button className=" border rounded-full p-2" onClick={handleBackToTop}>
+          <button
+            className=" border rounded-full p-2"
+            onClick={handleBackToTop}
+          >
             <PiArrowUp className="inline-block" size={30} />
           </button>
         )}
