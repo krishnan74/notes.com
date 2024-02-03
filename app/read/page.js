@@ -1,5 +1,5 @@
 "use client";
-
+// {_id, year, semester, department, subject, subjectCode, unit, unitName, part, question, answer}
 import { React, useState, useEffect } from "react";
 import {
   PiDownloadSimpleLight,
@@ -11,7 +11,7 @@ import {
 import Head from "next/head";
 import Link from "next/link";
 
-const Blog = () => {
+const Blog = ({topicList}) => {
   const [indexNumber, setIndexNumber] = useState(1);
   const handleScroll = () => {
     if (window.scrollY > 300) {
@@ -32,89 +32,107 @@ const Blog = () => {
   const handleBackToTop = () => {
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
-
+  console.log(topicList,"tt");
   console.log(indexNumber);
 
-  const topicList = [
-    {
-      id: 0,
-      title: "Algorithms",
-      content: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-    },
-    {
-      id: 1,
-      title:
-        "Building blocks of algorithms (statements, state, control flow, functions)",
-      content:
-        "Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-      questions: [
-        "What are the building blocks of algorithms?",
-        "Define statements",
-        "Define state",
-        "Define control flow",
-        "Define functions",
-      ],
+  // const topicList = [
+  //   {
+  //     id: 0,
+  //     title: "Algorithms",
+  //     content: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+  //   },
+  //   {
+  //     id: 1,
+  //     title:
+  //       "Building blocks of algorithms (statements, state, control flow, functions)",
+  //     content:
+  //       "Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+  //     questions: [
+  //       "What are the building blocks of algorithms?",
+  //       "Define statements",
+  //       "Define state",
+  //       "Define control flow",
+  //       "Define functions",
+  //     ],
 
-      answers: [
-        "The building blocks of algorithms are statements, state, control flow, and functions.",
-        "A statement is an instruction that the Python interpreter can execute. We have only seen the assignment statement so far. Some other kinds of statements that we’ll see shortly are while statements, for statements, if statements, and import statements.",
-        "The state of a program is the values of all of the variables at a given point in the program’s execution.",
-        "Control flow is the order in which the statements are executed.",
-        "A function is a named sequence of statements that performs a computation. When you define a function, you specify the name and the sequence of statements. Later, you can “call” the function by name.",
-      ],
-    },
-    {
-      id: 2,
-      title: "Notation (pseudo code, flow chart, programming language)",
-      content:
-        -"Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.",
-    },
-    {
-      id: 3,
-      title: "Algorithmic problem solving",
-      content:
-        "Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.",
-    },
-    {
-      id: 4,
-      title:
-        "Simple strategies for developing algorithms (iteration, recursion)",
-      content:
-        "Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.",
-    },
-    {
-      id: 5,
-      title: "Illustrative problems: find minimum in a list",
-      content:
-        "Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.",
-    },
-    {
-      id: 6,
-      title: "Insert a card in a list of sorted cards",
-      content:
-        "Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.",
-    },
-    {
-      id: 7,
-      title: "Guess an integer number in a range",
-      content:
-        "Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.",
-    },
+  //     answers: [
+  //       "The building blocks of algorithms are statements, state, control flow, and functions.",
+  //       "A statement is an instruction that the Python interpreter can execute. We have only seen the assignment statement so far. Some other kinds of statements that we’ll see shortly are while statements, for statements, if statements, and import statements.",
+  //       "The state of a program is the values of all of the variables at a given point in the program’s execution.",
+  //       "Control flow is the order in which the statements are executed.",
+  //       "A function is a named sequence of statements that performs a computation. When you define a function, you specify the name and the sequence of statements. Later, you can “call” the function by name.",
+  //     ],
+  //   },
+  //   {
+  //     id: 2,
+  //     title: "Notation (pseudo code, flow chart, programming language)",
+  //     content:
+  //       -"Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.",
+  //   },
+  //   {
+  //     id: 3,
+  //     title: "Algorithmic problem solving",
+  //     content:
+  //       "Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.",
+  //   },
+  //   {
+  //     id: 4,
+  //     title:
+  //       "Simple strategies for developing algorithms (iteration, recursion)",
+  //     content:
+  //       "Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.",
+  //   },
+  //   {
+  //     id: 5,
+  //     title: "Illustrative problems: find minimum in a list",
+  //     content:
+  //       "Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.",
+  //   },
+  //   {
+  //     id: 6,
+  //     title: "Insert a card in a list of sorted cards",
+  //     content:
+  //       "Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.",
+  //   },
+  //   {
+  //     id: 7,
+  //     title: "Guess an integer number in a range",
+  //     content:
+  //       "Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.",
+  //   },
 
-    {
-      id: 8,
-      title: "Towers of Hanoi",
-      content:
-        "Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.",
-    },
-  ];
+  //   {
+  //     id: 8,
+  //     title: "Towers of Hanoi",
+  //     content:
+  //       "Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.",
+  //   },
+  // ];
 
   return (
+    
     <div className="container flex px-4 justify-around gap-0 pt-[90px]">
+     
       <div className="w-[16%] fixed left-[30px] border-r bg-[rgba(255,255,255,0.4)]">
-        <h2 className="text-2xl font-bold text-center mt-5 mb-3">Index</h2>
+
+      {topicList && topicList.length > 0 ? (
+        <div>
+          {topicList.map((item, id) => (
+            <div 
+            className='p-[5px] border-b-2 border-grey'
+            key={id} 
+            onClick={() => handleClick(item)} >
+            {item.question}
+            </div>
+          ))}
+        </div>
+      ) : (
+        <div>NO RESULTS BRO</div>
+      )}
+
+        {/* <h2 className="text-2xl font-bold text-center mt-5 mb-3">Index</h2>
         <ul>
-          {topicList.map((post) => (
+          {topicList && topicList.map((post) => (
             <li
               key={post.id}
               id="topicList"
@@ -123,20 +141,20 @@ const Blog = () => {
               }`}
               onClick={() => setIndexNumber(post.id)}
             >
-              <p className="text-black hover:underline font-medium">
-                {post.title}
+              <p className="text-black  hover:underline font-medium">
+                {post.question}
               </p>
             </li>
           ))}
-        </ul>
+        </ul> */}
       </div>
-      <div className="w-[62%] bg-[rgba(255,255,255,0.4)] p-10">
+      {/* <div className="w-[62%] bg-[rgba(255,255,255,0.4)] p-10">
         <h1 className="text-3xl font-bold text-center mt-1 mb-3">
           PSPP Unit 1 : ALGORITHMIC PROBLEM SOLVING
         </h1>
         <div className="">
           <h2 className="text-2xl text-center font-extrabold">
-            {topicList[indexNumber].title}
+            {topicList[indexNumber].question}
           </h2>
           <div className="flex justify-end gap-4 mt-4 py-3 pr-3 border-y">
             <button className="mr-2">
@@ -156,7 +174,7 @@ const Blog = () => {
           {topicList.map((topic) =>
             topic.id === indexNumber ? (
               <div key={topic.id}>
-                {topic.questions?.map((question, index) => (
+                {topic.question?.map((question, index) => (
                   <div
                     key={index}
                     className="border-sp-2 border-gray-200 my-3 "
@@ -165,7 +183,7 @@ const Blog = () => {
                       {index + 1 + ") " + question}
                     </h3>
                     <p className="text-lg pl-5 font-extralight">
-                      {topic.answers[index]}
+                      {topic.answer[index]}
                     </p>
                   </div>
                 ))}
@@ -173,8 +191,8 @@ const Blog = () => {
             ) : null
           )}
         </div>
-      </div>
-      <div className="w-1/6 fixed right-[30px] border-l px-5 bg-[rgba(255,255,255,0.4)]">
+      </div> */}
+      {/* <div className="w-1/6 fixed right-[30px] border-l px-5 bg-[rgba(255,255,255,0.4)]">
         <h2 className="text-2xl font-bold mb-2 mt-5">Related Topics</h2>
         <ul>
           <li className="border-b mb-2">
@@ -194,7 +212,7 @@ const Blog = () => {
             PACKAGES
           </li>
         </ul>
-      </div>
+      </div> */}
       <div className="fixed top-[90vh] right-[16vw]">
         {showBackToTop && (
           <button
