@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useRouter } from 'next/navigation'
-import Read from '@/app/read/page';
+
+import Link from 'next/link';
 
 export const SearchList = ({ results }) => {
   const [topicList, setTopicList] = useState();
@@ -10,7 +11,6 @@ export const SearchList = ({ results }) => {
   const handleClick = (item) => {
     setTopicList(item.question);
     console.log(item);
-    router.push('/read');
 
   };
 
@@ -19,21 +19,22 @@ export const SearchList = ({ results }) => {
       {results && results.length > 0 ? (
         <div>
           {results.map((item, id) => (
-            <div 
-            className='p-[5px] border-b-2 border-grey'
-            key={id} 
-            onClick={() => handleClick(item)} >
+            <Link href={`/read/${item.question}`}>
+              <div
+                className='p-[5px] border-b-2 border-grey'
+                key={id} 
+                onClick={() => handleClick(item)} >
+              </div>
             {item.question}
-            </div>
+            </Link>
           ))}
         </div>
       ) : (
-        <div>NO RESULTS BRO</div>
+        <div></div>
       )}
       <div>
         <strong>Selected Topic:</strong> {topicList}
       </div>
-      {topicList && <Read topic={topicList} />}
     </div>
   );
 };
