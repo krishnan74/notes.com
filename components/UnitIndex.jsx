@@ -1,48 +1,50 @@
 import React from 'react'
-import { useState,useEffect } from 'react'
-import { useRouter } from 'next/router'
+import { useState, useEffect } from 'react'
+import Link from 'next/link'
 
-const fetchUnitIndex=async(index)=>{
-    try{
-    const data = await fetch();
+const fetchUnitIndex = async (unit) => {
+  try {
+    const data = await fetch(`https://us-east-1.aws.data.mongodb-api.com/app/todosample0-vvcql/endpoint/getIndex?unitName=${unit}`);
     const response = data.json();
     return response;
-    }
-    catch(e){
-        console.error('Error fetching data:', e.message);
+  }
+  catch (e) {
+    console.error('Error fetching data:', e.message);
     return { error: e.message };
-    }
+  }
 
 }
 
 
-const UnitIndex = ({index}) => {
+const UnitIndex = ({ unit }) => {
 
 
-    const [UnitIndex,setUnitIndex]=useState(null);
-    useEffect(()=>{
-        fetchUnitIndex(index).then((data)=>{
-            setUnitIndex(data)
-        })
-    },[]);
-
+  const [UnitIndex, setUnitIndex] = useState([]);
+  useEffect(() => {
+    fetchUnitIndex(unit).then((data) => {
+      setUnitIndex(data)
+    })
+  }, [unit]);
+  console.log(unit);
   return (
-  <div className="w-[16%] fixed left-[30px] border-r bg-[rgba(255,255,255,0.4)]">
-  <h2 className="text-2xl font-bold text-center mt-5 mb-3">Index</h2>
-  <ul>
-    {UnitIndex.map((post) => (
-      <li
-        key={post.id}
-        id="topicList"
-        className={`py-2 px-3 cursor-pointer border-b border-gray-200`}
-      >
-        <p className="text-black hover:underline font-medium">
-          {post.question}
-        </p>
-      </li>
-    ))}
-  </ul>
-</div>
+
+    <div>
+      <ul>
+        {UnitIndex.map((topic) => (
+          <li
+            key={topic.id}
+            id="topicList"
+            className={`py-2 px-3 cursor-pointer border-b border-red-200`}>
+            <Link href={`/read/${topic.question}`} >
+              <div className="text-black hover:underline font-medium">
+                {topic.question}
+              </div>
+
+            </Link>
+          </li>
+        ))}
+      </ul>
+    </div>
   )
 }
 

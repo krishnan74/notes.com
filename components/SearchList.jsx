@@ -1,12 +1,8 @@
 import React, { useState } from 'react';
-import { useRouter } from 'next/navigation'
-
 import Link from 'next/link';
 
 export const SearchList = ({ results }) => {
   const [topicList, setTopicList] = useState();
-  const router = useRouter();
-
 
   const handleClick = (item) => {
     setTopicList(item.question);

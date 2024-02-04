@@ -1,11 +1,10 @@
-import React from 'react'
-import { useRouter } from 'next/router';
-import { useState,useEffect } from 'react'
+import React, { useState, useEffect } from 'react';
+import Link from 'next/link';
 
-const fetchData = async (id) => {
+const fetchData = async (subject) => {
   try {
     const data = await fetch(
-      `https://us-east-1.aws.data.mongodb-api.com/app/todosample0-vvcql/endpoint/getUnit?SearchUnit=${id}`
+      `https://us-east-1.aws.data.mongodb-api.com/app/todosample0-vvcql/endpoint/getSubject?Search=${subject}`
     );
     const response = await data.json();
     return response;
@@ -15,44 +14,43 @@ const fetchData = async (id) => {
   }
 };
 
-
-const UnitList = ({unit}) => {
-
-  const router = useRouter();
-  const { id } = router.query;
-  const [unitList, setUnitList] = useState(null);
+const UnitList = ({ subject }) => {
+  const [unitList, setUnitList] = useState([]);
 
   useEffect(() => {
-    if (id) {
-      fetchData(id).then((data) => {
-        setUnitList(data);
-      });
-    }
-  }, [id]);
+    fetchData(subject).then((data) => {
+      setUnitList(data);
+    });
+  }, [subject]);
 
   return (
     <div className="w-1/6 fixed right-[30px] border-l px-5 bg-[rgba(255,255,255,0.4)]">
-        <h2 className="text-2xl font-bold mb-2 mt-5">Related Topics</h2>
-        <ul>
-          <li className="border-b mb-2">
-              <span className="font-bold ">PSPP UNIT-2:</span> DATA TYPES,
-              EXPRESSIONS, STATEMENTS
+      <h2 className="text-2xl font-bold mb-2 mt-5">Related Topics</h2>
+      <ul>
+        {unitList.map((group, groupId) => (
+          <Link href={`/read/${group.documents[0].question}`} >
+            <li key={groupId} className="border-b mb-2">
+            <span className="font-bold">{subject} UNIT-{group._id}: {group.documents[0].unitName}</span>
+            <ul>
+              {group.documents.map((document, documentId) => (
+                <div>
+                  {documentId < 3 &&
+                      <li key={documentId}>
+                      <span>{document.question},</span>
+                      
+                    </li>
+                  }
+                </div>
+                
+              ))}
+            </ul>
           </li>
-          <li className="border-b mb-2">
-            <span className="font-bold">PSPP UNIT-3:</span> CONTROL FLOW,
-            FUNCTIONS, STRINGS
-          </li>
-          <li className="border-b mb-2">
-            <span className="font-bold">PSPP UNIT-4:</span> LISTS, TUPLES,
-            DICTIONARIES
-          </li>
-          <li className="border-b mb-2">
-            <span className="font-bold">PSPP UNIT-5:</span> FILES, MODULES,
-            PACKAGES
-          </li>
-        </ul>
-      </div>
-  )
-}
+          </Link>
+          
+        ))}
+      </ul>
+    </div>
+  );
+};
 
-export default UnitList
+export default UnitList;
