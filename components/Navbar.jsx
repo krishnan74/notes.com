@@ -3,6 +3,7 @@ import React from "react";
 import { useState } from "react";
 import { PiCaretDown } from "react-icons/pi";
 import DropDownMenu from "./DropDownMenu";
+import SearchBar from './SearchBar'
 
 const Navbar = () => {
   const [isSubjectDropdownVisible, setSubjectDropdownVisible] = useState(false);

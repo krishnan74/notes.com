@@ -1,6 +1,8 @@
+"use client"
 import React from "react";
-import { PiMagnifyingGlass } from "react-icons/pi";
 import { Poppins } from "next/font/google";
+import SearchPage from "@/pages/SearchPage";
+import Read from "@/pages/Read";
 
 const poppins = Poppins({ subsets: ["latin"], weight: ["600"] });
 
@@ -16,17 +18,7 @@ const Home_page = () => {
         >
           Notes, Question Banks, Syllabus All at one place
         </p>
-        <div className="relative topic-search-box mt-7">
-          <input
-            type="text"
-            name=""
-            className="border-white border-2 bg-[#f8f8f8] w-[1200px] h-[50px] rounded-full pl-7"
-            placeholder="search for what you want to study..."
-          />
-          <button>
-            <PiMagnifyingGlass className="absolute top-4 right-6 text-gray-500" />
-          </button>
-        </div>
+        <SearchPage/>
       </div>
     </div>
   );

@@ -13,6 +13,7 @@ import Link from "next/link";
 
 const Blog = () => {
   const [indexNumber, setIndexNumber] = useState(1);
+
   const handleScroll = () => {
     if (window.scrollY > 300) {
       setShowBackToTop(true);
