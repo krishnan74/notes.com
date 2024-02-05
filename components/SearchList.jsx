@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import Link from "next/link";
 import { PiCaretDown, PiCaretUp } from "react-icons/pi";
 import { GoArrowUpRight } from "react-icons/go";
 import { useRouter } from "next/navigation";
@@ -9,6 +8,7 @@ export const SearchList = ({ results }) => {
   const [showDetails, setShowDetails] = useState(
     Array(results.length).fill(false)
   );
+
 
   const router = useRouter();
 
@@ -27,6 +27,10 @@ export const SearchList = ({ results }) => {
     router.push(`/read/${item.question}`);
   };
 
+
+
+  
+
   return (
     <div className="my-[20px] py-3 rounded-xl bg-[rgba(255,255,255,0.4)]">
       {results && results.length > 0 ? (
@@ -39,12 +43,13 @@ export const SearchList = ({ results }) => {
               <div onClick={() => navigate(item)} className="w-[60vw]">
                 <p className="font-bold capitalize">{item.question}</p>
 
-                {showDetails[id] && (
+                {showDetails[id] &&(
                   <p className="border-t border-[#cdcdcd] pt-2 mt-2">
-                    Lorem ipsum, dolor sit amet consectetur adipisicing elit.
-                    Nostrum excepturi, rerum dolorem accusamus maiores incidunt
-                    commodi quae nam voluptates recusandae libero corporis
-                    officiis ducimus facilis quasi ipsum illum harum qui?
+                       <div
+                    dangerouslySetInnerHTML={{ __html: item.description }}
+                    className="md-content"
+                  ></div>
+                   
                   </p>
                 )}
               </div>
@@ -64,9 +69,7 @@ export const SearchList = ({ results }) => {
       ) : (
         <div></div>
       )}
-      {/* <div className="px-4">
-        <strong>Selected Topic:</strong> {topicList}
-      </div> */}
+    
     </div>
   );
 };
